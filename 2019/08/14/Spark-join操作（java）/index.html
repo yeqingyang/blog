@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1. RDD joinrdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的JavaPairRDD支持内连接 JavaPairRDD.join左连接 JavaPairRDD.leftOuterJoin右链接 JavaPairRDD.rightOuterJoin全连接 JavaPairRDD.fullOuterJoin  123456">
+<meta name="description" content="1. RDD joinrdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的JavaPairRDD支持内连接 JavaPairRDD.join左连接 JavaPairRDD.leftOuterJoin右链接 JavaPairRDD.rightOuterJoin全连接 JavaPairRDD.fullOuterJoin">
 <meta name="keywords" content="spark,join">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark join操作（java）">
 <meta property="og:url" content="https://yeqingyang.github.io/blog/2019/08/14/Spark-join操作（java）/index.html">
 <meta property="og:site_name" content="Bambi">
-<meta property="og:description" content="1. RDD joinrdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的JavaPairRDD支持内连接 JavaPairRDD.join左连接 JavaPairRDD.leftOuterJoin右链接 JavaPairRDD.rightOuterJoin全连接 JavaPairRDD.fullOuterJoin  123456">
+<meta property="og:description" content="1. RDD joinrdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的JavaPairRDD支持内连接 JavaPairRDD.join左连接 JavaPairRDD.leftOuterJoin右链接 JavaPairRDD.rightOuterJoin全连接 JavaPairRDD.fullOuterJoin">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-14T03:44:41.664Z">
+<meta property="og:updated_time" content="2019-08-15T06:56:11.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark join操作（java）">
-<meta name="twitter:description" content="1. RDD joinrdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的JavaPairRDD支持内连接 JavaPairRDD.join左连接 JavaPairRDD.leftOuterJoin右链接 JavaPairRDD.rightOuterJoin全连接 JavaPairRDD.fullOuterJoin  123456">
+<meta name="twitter:description" content="1. RDD joinrdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的JavaPairRDD支持内连接 JavaPairRDD.join左连接 JavaPairRDD.leftOuterJoin右链接 JavaPairRDD.rightOuterJoin全连接 JavaPairRDD.fullOuterJoin">
 
 
 
@@ -353,6 +353,7 @@
 
       
         <h1 id="1-RDD-join"><a href="#1-RDD-join" class="headerlink" title="1. RDD join"></a>1. RDD join</h1><p>rdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的<br>JavaPairRDD支持<br>内连接 JavaPairRDD.join<br>左连接 JavaPairRDD.leftOuterJoin<br>右链接 JavaPairRDD.rightOuterJoin<br>全连接 JavaPairRDD.fullOuterJoin </p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;Integer, Integer&gt; javaRDD1 = jsc.parallelize(Lists.newArrayList(3,1,2,4,11,6,7,90,9))</span><br><span class="line">        .mapToPair(t -&gt; Tuple2.apply(t, 2*t));</span><br><span class="line">JavaPairRDD&lt;Integer, Integer&gt; javaRDD2 = jsc.parallelize(Lists.newArrayList(3,1,2,4,11,6,7,90,9))</span><br><span class="line">        .mapToPair(t -&gt; Tuple2.apply(t, t*t));</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;Integer, Tuple2&lt;Integer, Integer&gt;&gt; innerJoinRdd = javaRDD1.join(javaRDD2);</span><br><span class="line">JavaPairRDD&lt;Integer, Tuple2&lt;Integer, Optional&lt;Integer&gt;&gt;&gt; leftJoinRdd = javaRDD1.leftOuterJoin(javaRDD2);</span><br></pre></td></tr></table></figure>
 
 <h1 id="2-Dataframe-Dataset-join"><a href="#2-Dataframe-Dataset-join" class="headerlink" title="2. Dataframe/Dataset join"></a>2. Dataframe/Dataset join</h1><p>Dataframe/Dataset 可以指定通过某一列来做join(与sql基本一致)<br>示例</p>

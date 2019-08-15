@@ -351,22 +351,14 @@
 
       
         
-          
-            <h1 id="1-RDD-join"><a href="#1-RDD-join" class="headerlink" title="1. RDD join"></a>1. RDD join</h1><p>rdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的<br>JavaPairRDD支持<br>内连接 JavaPairRDD.join<br>左连接 JavaPairRDD.leftOuterJoin<br>右链接 JavaPairRDD.rightOuterJoin<br>全连接 JavaPairRDD.fullOuterJoin </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JavaPairRDD&lt;Integer, Integer&gt; javaRDD1 = jsc.parallelize(Lists.newArrayList(3,1,2,4,11,6,7,90,9))</span><br><span class="line">        .mapToPair(t -&gt; Tuple2.apply(t, 2*t));</span><br><span class="line">JavaPairRDD&lt;Integer, Integer&gt; javaRDD2 = jsc.parallelize(Lists.newArrayList(3,1,2,4,11,6,7,90,9))</span><br><span class="line">        .mapToPair(t -&gt; Tuple2.apply(t, t*t));</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;Integer, Tuple2&lt;Integer, Integer&gt;&gt; innerJoinRdd = javaRDD1.join(javaRDD2);</span><br><span class="line">JavaPairRDD&lt;Integer, Tuple2&lt;Integer, Optional&lt;Integer&gt;&gt;&gt; leftJoinRdd = javaRDD1.leftOuterJoin(javaRDD2);</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-Dataframe-Dataset-join"><a href="#2-Dataframe-Dataset-join" class="headerlink" title="2. Dataframe/Dataset join"></a>2. Dataframe/Dataset join</h1><p>Dataframe/Dataset 可以指定通过某一列来做join(与sql基本一致)<br>示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dataset&lt;Row&gt; joinSet = dataset1.join(dataset2,dataset1.col(&quot;id&quot;).equalTo(dataset2.col(&quot;id&quot;)), &quot;left_outer&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>如果两个表的列明相同，且是内连接，第二个参数可以直接用String<br>例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset1.join(dataset2,&quot;id&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>这种方式join后只会保留一个id列。<br>dataset1.col(“id”).equalTo(dataset2.col(“id”)) 而这样的方式会有两个id列<br>如果要去除其中一个id列，可是用.drop(dataset1.col(“id”))</p>
-<p>注意，两个列的情况下如果select需要明确指明需要的那个id<br>例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">joinSet.select(&quot;id&quot;);//会报错“Reference &apos;id&apos; is ambiguous, could be: id, id.”</span><br><span class="line"></span><br><span class="line">joinSet.select(dataset1.col(&quot;id&quot;));//正确</span><br></pre></td></tr></table></figure>
-
-
-          
+          <h1 id="1-RDD-join"><a href="#1-RDD-join" class="headerlink" title="1. RDD join"></a>1. RDD join</h1><p>rdd可以join的前提是必须是JavaPairRDD, 两个RDD的jion是通过PairRDD中的key来建立联系的<br>JavaPairRDD支持<br>内连接 JavaPairRDD.join<br>左连接 JavaPairRDD.leftOuterJoin<br>右链接 JavaPairRDD.rightOuterJoin<br>全连接 JavaPairRDD.fullOuterJoin </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2019/08/14/Spark-join操作（java）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
